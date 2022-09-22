@@ -1,0 +1,396 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Campground Attributes",
+  "description": "Note: This file is a WIP, certain things have not been implemented yet, for example validation on many of the fields and required attributes",
+  "type": "object",
+  "required": [
+    "campgroundName",
+    "campgroundId",
+    "parentName",
+    "parentId",
+    "agencyName",
+    "operatedBy",
+    "managingAgency",
+    "regionName",
+    "districtId",
+    "county",
+    "state",
+    "congressionalDistrict",
+    "timeZone",
+    "daylightSavings",
+    "latitude",
+    "longitude",
+    "mailingAddress",
+    "phoneNumber",
+    "emailAddress",
+    "currentStatus",
+    "currentConditions",
+    "reservations",
+    "first-comeFirst-served",
+    "seasonality",
+    "seasonOpen",
+    "seasonClose",
+    "pets",
+    "fires",
+    "alcohol",
+    "smoking",
+    "fireworks",
+    "firearms",
+    "SUAS",
+    "ageRequirement",
+    "boats",
+    "waterAccess",
+    "horseFeed",
+    "generators",
+    "quietHours",
+    "on-sitePersonnel",
+    "seasonalStaffing",
+    "emergencyContact",
+    "passesAccepted",
+    "discountsAccepted",
+    "paymentTypes",
+    "gateHours",
+    "check-in",
+    "check-out",
+    "check-inLocation",
+    "check-outLocation",
+    "description"
+  ],
+  "properties": {
+    "campgroundName": {
+      "description": "A name by which the campground is officially or legally known. Spell out the full name of the facility",
+      "type": "string"
+    },
+    "campgroundId": {
+      "description": "The official numeric or alphanumeric identifier for the campground facility. This identifier is assigned by the parent agency. ",
+      "type": "string"
+    },
+    "parentName": {
+      "description": "The name of the parent facility/rec area/project/ park/forest/etc. of the campground facility",
+      "type": "string"
+    },
+    "parentId": {
+      "description": "The official numeric or alphanumeric identifier for the campground’s parent facility. This identifier is assigned by the parent agency.",
+      "type": "string"
+    },
+    "aliases": {
+      "description": "Other names by which the campground is commonly known",
+      "type": "string"
+    },
+    "agencyName": {
+      "description": "Name used to identify the parent (federal) agency responsible for the facility (e.g. NPS, USFS)",
+
+      "type": "string",
+      "enum": ["NPS", "USFS", "BLM"]
+    },
+    "operatedBy": {
+      "description": "Type of entity that operates the facility",
+
+      "type": "string",
+      "enum": ["Concessionaire", "Agency", "Other"]
+    },
+    "managingAgency": {
+      "description": "Name used to identify organization managing campground whether concessionaire, agency or a partnering (non-federal) agency responsible for managing the facility. (e.g. name of business, actual agency name, Idaho Parks and Rec, etc.)",
+      "type": "string"
+    },
+    "logo": {
+      "description": "Image file for the parent agency’s logo",
+      "type": "string",
+      "format": "uri"
+    },
+    "regionName": {
+      "description": "Top level in the location hierarchy (beneath agency)",
+      "type": "string"
+    },
+    "regionId": {
+      "description": "Unique identifier [Need to specify where this number comes from.]",
+      "type": "integer"
+    },
+    "districtName": {
+      "description": "Second level in the location hierarchy (beneath regionName)",
+      "type": "string"
+    },
+    "districtId": {
+      "description": "Unique identifier [Need to specify where this number comes from.]",
+      "type": "integer"
+    },
+    "physicalAddress": {
+      "description": "The address used for the purpose of navigation. ",
+      "type": "array",
+      "prefixItems": [
+        { "type": "string" },
+        { "type": ["stirng", "null"] },
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "integer" }
+      ]
+    },
+    "locationDescription": {
+      "description": "Some locations may not have a street address, or the address may not provide the details users need to locate the campground. This field allows managers to describe a location, based on landmarks, intersections, or other way of finding information.",
+      "type": "string"
+    },
+    "county": {
+      "description": "The county in which the campground is physically located.",
+      "type": "string"
+    },
+    "state": {
+      "description": "The state in which the campground is physically located.",
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 2
+    },
+    "congressionalDistrict": {
+      "description": "The Congressional District in which the campground is physically located.",
+      "type": "string"
+    },
+    "timeZone": {
+      "description": "Time Zone (e.g. Eastern, Central, Mountain) in which the campground is located.",
+      "type": "string"
+    },
+    "daylightSavings": {
+      "description": "Whether facility time zone observes daylight savings time. This info helps cross-country travelers plan and be on time for check-in",
+      "type": "boolean"
+    },
+    "latitude": {
+      "description": "Latitude of the campground location. Intention is to use a point at the campground that makes sense, such as the entrance location, or facility building such as visitor center",
+      "type": "string",
+      "pattern": "^(\\+|-)?(?:90(?:(?:\\.0{1,5})?)|(?:[0-9]|[1-8][0-9])(?:(?:\\.[0-9]{1,5})?))$"
+    },
+    "longitude": {
+      "description": "Longitude of the campground location. Intention is to use a point at the campground that makes sense, such as the entrance location or facility building such as visitor center.",
+      "type": "string",
+      "pattern": "^(\\+|-)?(?:180(?:(?:\\.0{1,5})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\\.[0-9]{1,5})?))$"
+    },
+    "elevation": {
+      "description": "Distance above sea level (in feet)",
+      "type": "number"
+    },
+    "nearestCity": {
+      "description": "Indicate the city or town closest to the campground (using drive time, not as the crow flies)",
+      "type": "string"
+    },
+    "drivingDirections": {
+      "description": "Brief description of the driving directions from the nearest logical point(s) of reference.",
+      "type": "string"
+    },
+    "accessNotes": {
+      "description": "Brief description of the roads, trails, or waterways that lead to the campground",
+      "type": "string"
+    },
+    "mailingAddress": {
+      "description": "The mailing address to which inquiries and complaints should be addressed for this facility. May be different from the Physical Address, listed under Location.",
+      "type": "string"
+    },
+    "phoneNumber": {
+      "description": "Local number, either at the campground, or at the managing agency facility. This number will be published on the website, to assist those with site-specific questions (not for reservation inquiries).",
+      "type": "string"
+    },
+    "emailAddress": {
+      "description": "Email address to which inquiries and complaints should be addressed for this facility.",
+      "type": "string",
+      "format": "email"
+    },
+    "currentStatus": {
+      "description": "Is the campground currently open or closed? (May or may not align with season dates—closures may occur due to weather, government shutdown, health emergency etc.)",
+
+      "type": "string",
+      "enum": ["Open", "Closed", "Temporarily Closed"]
+    },
+    "currentConditions": {
+      "description": "Description of the campground status, in case of a natural disaster or extreme weather conditions. Check with facilities/NPS.gov site (new mapping application) for current condition if not supplied. Make sure this is at campground level.",
+      "type": "string"
+    },
+    "reservations": {
+      "description": "Are reservations taken at this facility?",
+      "type": "string",
+      "enum": ["Yes", "No", "Seasonal"]
+    },
+    "first-comeFirst-served": {
+      "description": "Are there first-come, first served campsites at this facility?",
+      "type": "string",
+      "enum": ["Yes", "No", "Seasonal"]
+    },
+    "seasonality": {
+      "description": "Does the campground stay open year-round or close for part of the year?",
+      "type": "boolean"
+    },
+    "seasonOpen": {
+      "description": "If the campground has season dates, what date does it open to visitors?",
+      "type": "string",
+      "format": "date"
+    },
+    "seasonClose": {
+      "description": "If the campground has season dates, what date does it close?",
+      "type": "string",
+      "format": "date"
+    },
+    "seasonTypes": {
+      "description": "Type of season",
+      "type": "string",
+      "enum": ["Peak", "Non-Peak", "Shoulder Season"]
+    },
+    "pets": {
+      "description": "Are pets allowed at the campground?",
+      "type": "string",
+      "enum": ["Yes", "No", "Yes with conditions"]
+    },
+    "fires": {
+      "description": "Are fires allowed? If so, when?",
+      "type": "string",
+      "enum": ["Yes", "No", "Yes with conditions"]
+    },
+    "alcohol": {
+      "description": "Is alcohol allowed?",
+      "type": "boolean"
+    },
+    "glassBottles": {
+      "description": "Are glass bottles allowed?",
+      "type": "string",
+      "enum": ["Yes", "No", "Yes with conditions"]
+    },
+    "smoking": {
+      "description": "Is smoking allowed?",
+      "type": "string",
+      "enum": ["Yes", "No", "Yes with conditions"]
+    },
+    "fireworks": {
+      "description": "Are fireworks allowed?",
+      "type": "boolean"
+    },
+    "firearms": {
+      "description": "Are firearms allowed?",
+      "type": "string",
+      "enum": ["Yes", "No", "Yes with conditions"]
+    },
+    "SUAS": {
+      "description": "Are small unmanned aircraft systems / drones allowed?",
+      "type": "string",
+      "enum": ["Yes", "No", "Yes with conditions"]
+    },
+    "ORV": {
+      "description": "Are off-road vehicles allowed to be driven on campground roads?",
+      "type": "string",
+      "enum": ["Yes", "No", "Yes with conditions"]
+    },
+    "ageRequirement": {
+      "description": "Is there an age requirement for making a reservation? ",
+      "type": "boolean"
+    },
+    "boats": {
+      "description": "Are there restrictions on the types of boats allowed at this campground? (e.g. no motorboats, no gasoline-powered vessels, no wake/10 mph) Are there licensing requirements to operate a boat?",
+      "type": "string"
+    },
+    "waterAccess": {
+      "description": "If there are bodies of water accessible to visitors, are there rules about accessing them?",
+      "type": "string",
+      "enum": ["Yes", "No", "Yes with conditions"]
+    },
+    "foodStorage": {
+      "description": "What are the rules (or recommendations) for bear-proofing, animal-proofing food and other scented items?",
+      "type": "string"
+    },
+    "horseFeed": {
+      "description": "Is there a weed-free feed requirement?",
+      "type": "string",
+      "enum": ["Yes", "No", "Yes with conditions"]
+    },
+    "generators": {
+      "description": "Are generators allowed? If allowed, what are the hours?",
+      "type": "string",
+      "enum": ["Yes", "No", "Yes with conditions"]
+    },
+    "quietHours": {
+      "description": "Are quiet hours enforced? If so, what are the hours?",
+      "type": "string",
+      "enum": ["Yes", "No", "Yes with conditions"]
+    },
+    "on-sitePersonnel": {
+      "description": "Are there staff on site at the campground?",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Host",
+          "Attendant",
+          "Facility Staff",
+          "No staff on site",
+          "Security"
+        ]
+      }
+    },
+    "seasonalStaffing": {
+      "description": "When are staff on site?",
+      "type": "string",
+      "enum": ["Never", "Always", "Seasonal"]
+    },
+    "emergencyContact": {
+      "description": "Who are the emergency personnel? How can they be contacted? ",
+      "type": "string"
+    },
+    "passesAccepted": {
+      "description": "Are any passes accepted? If so, which ones?",
+      "type": "string"
+    },
+    "discountsAccepted": {
+      "description": "Are any discounts accepted (e.g. veterans, student)? If so, which ones?",
+      "type": "string"
+    },
+    "paymentTypes": {
+      "description": "What payment types are accepted at the facility?",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Online only",
+          "Campground host",
+          "Cash self-pay",
+          "Digital fee machine",
+          "Other"
+        ]
+      }
+    },
+    "gateHours": {
+      "description": "What time do the gates close?",
+      "type": "string",
+      "format": "time"
+    },
+    "check-in": {
+      "description": "What is the earliest time visitors are allowed to check in to the campground?",
+      "type": "string",
+      "format": "time"
+    },
+    "check-out": {
+      "description": "What is the latest time visitors may remain at their campsites? (When is checkout required.)",
+      "type": "string",
+      "format": "time"
+    },
+    "check-inLocation": {
+      "description": "Where do visitors go to check in to their campsites?",
+      "type": "string"
+    },
+    "check-outLocation": {
+      "description": "Where do visitors go to check out from their campsites? (May be N/A)",
+      "type": "string"
+    },
+    "description": {
+      "description": "High-level description of the camping facility. This description is featured on the campground page.",
+      "type": "string"
+    },
+    "map": {
+      "description": "Campground map, showing roads, key amenities, and sites.",
+      "type": "string"
+    },
+    "photos": {
+      "description": "Photos of the facility, including key amenities ",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri"
+      }
+    },
+    "relatedWebsites": {
+      "description": "Links to websites providing additional information about the campground facility.",
+      "type": "string"
+    }
+  }
+}

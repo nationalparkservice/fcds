@@ -1,0 +1,2036 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Campground Accessibility",
+  "description": "Note: This file is a WIP, certain things have not been implemented yet, for example validation on many of the fields and required attributes",
+  "type": "object",
+  "required": [],
+  "properties": {
+    "campgroundEnvironmentSetting": {
+      "type": "array",
+      "definition": "Campground environment setting details",
+      "items": {
+        "type": "object",
+        "required": ["setting"],
+        "properties": {
+          "setting": {
+            "type": "string",
+            "enum": [
+              "desert",
+              "lake",
+              "river",
+              "stream",
+              "canyon",
+              "mountains",
+              "forest",
+              "prairie",
+              "plains",
+              "rock formations",
+              "waterfalls",
+              "shade"
+            ]
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 768
+          }
+        }
+      }
+    },
+    "campgroundEnvironmentSettingAdditionalInfo": {
+      "type": "string",
+      "description": "Additional Information for campground environment",
+      "maxLength": 768
+    },
+    "siteType": {
+      "type": "string",
+      "enum": ["campground", "cabin", "lookout"]
+    },
+    "numberOfAccessibleCampsites": {
+      "type": "integer",
+      "description": "How many campsites are accessible? Based on United States Access Board standards (May 2014)"
+    },
+    "perimeterBarriersPresent": {
+      "type": "object",
+      "description": "Barriers to accessibility details",
+      "required": ["onPerimeter", "barrierCount"],
+      "properties": {
+        "barriers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["barrierType", "openingLength", "barrierHeight"],
+            "properties": {
+              "barrierType": {
+                "type": "string",
+                "enum": [
+                  "fallen tree",
+                  "vertical wood posts",
+                  "horizontal wood barriers",
+                  "rock",
+                  "gully"
+                ]
+              },
+              "openingLength": {
+                "type": "number",
+                "description": "Measure opening between barriers (inches and decimal, ex. .125)"
+              },
+              "barrierHeight": {
+                "type": "number",
+                "description": "Height of barrier (inches and decimal, ex. .125)"
+              }
+            }
+          }
+        },
+        "onPerimeter": {
+          "type": "boolean",
+          "description": "Are there barriers alongside the perimeter of the unit"
+        },
+        "barrierCount": {
+          "type": "integer",
+          "max": 4
+        }
+      }
+    },
+    "perimeterBarriersPresentAdditionalInfo": {
+      "type": "string",
+      "description": "Additional Information for perimeter barriers",
+      "maxLength": 768
+    },
+    "parkingAccessibility": {
+      "type": "object",
+      "description": "Accessible parking details",
+      "properties": {
+        "parkingType": {
+          "type": "string",
+          "enum": ["lot", "spur"]
+        },
+        "location": {
+          "type": "string"
+        },
+        "spacesCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "parkingLength": {
+          "type": "number"
+        },
+        "parkingWidth": {
+          "type": "number"
+        },
+        "accessibilityParkingSign": {
+          "type": "boolean"
+        },
+        "surfaceType": {
+          "type": "string",
+          "enum": [
+            "asphalt",
+            "compacted gravel",
+            "loose gravel",
+            "concrete",
+            "grass",
+            "lumber",
+            "native dirt",
+            "brick",
+            "sand"
+          ]
+        }
+      }
+    },
+    "parkingAccessibilityAdditionalInfo": {
+      "type": "string",
+      "description": "Additional Information for parking",
+      "maxLength": 768
+    },
+    "restroomStationAccessibility": {
+      "type": "array",
+      "description": "Restroom/comfort station accessibility details",
+      "items": {
+        "type": "object",
+        "properties": {
+          "numberOfAccessibleRestrooms": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "location": {
+            "type": "string"
+          },
+          "barrierToEnterHeight": {
+            "type": "number"
+          },
+          "ORARRouteLength": {
+            "type": "number"
+          },
+          "permanentFacility": {
+            "type": "boolean"
+          },
+          "mainDoorPressure": {
+            "type": "number"
+          },
+          "soapDispenser": {
+            "type": "object",
+            "properties": {
+              "height": {
+                "type": "number"
+              },
+              "dispenserType": {
+                "type": "string"
+              },
+              "requiresLessThan5lbsForce": {
+                "type": "boolean"
+              }
+            }
+          },
+          "hygieneCollectionContainer": {
+            "type": "object",
+            "properties": {
+              "height": {
+                "type": "number"
+              },
+              "width": {
+                "type": "number"
+              },
+              "depth": {
+                "type": "number"
+              },
+              "location": {
+                "type": "string"
+              },
+              "containerType": {
+                "type": "string"
+              }
+            }
+          },
+          "OutletHeight": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "restroomStationAccessibilityAdditionalInfo": {
+      "type": "string",
+      "description": "Additional Information for restrooms",
+      "maxLength": 768
+    },
+    "restroomPitToiletAccessibility": {
+      "type": "array",
+      "description": "Restroom/comfort station pit toilet accessibility details",
+      "items": {
+        "type": "object",
+        "properties": {
+          "stallCount": {
+            "type": "integer"
+          },
+          "doorWidth": {
+            "type": "number"
+          },
+          "entrySpaceLength": {
+            "type": "number"
+          },
+          "stallLatchHeight": {
+            "type": "number"
+          },
+          "entrySpaceWidth": {
+            "type": "number"
+          },
+          "turningSpaceLength": {
+            "type": "number"
+          },
+          "turningSpaceWidth": {
+            "type": "number"
+          },
+          "sidewallGrabBarCompliance": {
+            "type": "boolean"
+          },
+          "backwallGrabBarCompliance": {
+            "type": "boolean"
+          },
+          "toiletSeatLidHeight": {
+            "type": "number"
+          },
+          "paperDispenserDistance": {
+            "type": "number"
+          },
+          "paperDispenserHeight": {
+            "type": "number"
+          },
+          "paperDispenserLocation": {
+            "type": "string"
+          },
+          "closedFistTest": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "restroomPitToiletAdditionalInfo": {
+      "type": "string",
+      "description": "Additional Information for pit toilets",
+      "maxLength": 768
+    },
+    "restroomVaultToiletAccessibility": {
+      "type": "array",
+      "description": "Restroom/comfort station Vault Toilet Accessibility Details",
+      "items": {
+        "type": "object",
+        "properties": {
+          "stallCount": {
+            "type": "integer"
+          },
+          "doorWidth": {
+            "type": "number"
+          },
+          "entrySpaceLength": {
+            "type": "number"
+          },
+          "stallLatchHeight": {
+            "type": "number"
+          },
+          "entrySpaceWidth": {
+            "type": "number"
+          },
+          "turningSpaceLength": {
+            "type": "number"
+          },
+          "turningSpaceWidth": {
+            "type": "number"
+          },
+          "sidewallGrabBarCompliance": {
+            "type": "boolean"
+          },
+          "backwallGrabBarCompliance": {
+            "type": "boolean"
+          },
+          "toiletSeatLidHeight": {
+            "type": "number"
+          },
+          "paperDispenserDistance": {
+            "type": "number"
+          },
+          "paperDispenserHeight": {
+            "type": "number"
+          },
+          "paperDispenserLocation": {
+            "type": "string"
+          },
+          "closedFistTest": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "restroomVaultToiletAdditionalInfo": {
+      "type": "string",
+      "description": "Additional Information for vault toilets",
+      "maxLength": 768
+    },
+    "flushToiletAccessibility": {
+      "type": "array",
+      "description": "Restroom/comfort station Standing Urinal Accessibility Details",
+      "items": {
+        "type": "object",
+        "properties": {
+          "stallCount": {
+            "type": "integer"
+          },
+          "adult": {
+            "type": "boolean"
+          },
+          "waterless": {
+            "type": "boolean"
+          },
+          "height": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "flushToiletAdditionalInfo": {
+      "type": "string",
+      "description": "Additional Information for flush toilets",
+      "maxLength": 768
+    },
+    "indoorShowerAccessibility": {
+      "type": "array",
+      "description": "Shower accessibility details",
+      "items": {
+        "type": "object",
+        "properties": {
+          "barriersToEnter": {
+            "type": "boolean"
+          },
+          "soapDispenser": {
+            "type": "object",
+            "properties": {
+              "height": {
+                "type": "number"
+              },
+              "dispenserType": {
+                "type": "string"
+              },
+              "requiresLessThan5lbsForce": {
+                "type": "boolean"
+              }
+            }
+          },
+          "showerHeadCount": {
+            "type": "integer"
+          },
+          "608ABAASCompliant": {
+            "type": "boolean"
+          },
+          "grabBarCompliant": {
+            "type": "boolean"
+          },
+          "sprayUnitHeight": {
+            "type": "number"
+          },
+          "secondSprayUnitHeight": {
+            "type": "number"
+          },
+          "showerControlsDistanceFromSeatWall": {
+            "type": "number"
+          },
+          "showerStallLength": {
+            "type": "number"
+          },
+          "showerStallWidth": {
+            "type": "number"
+          },
+          "solarShowerHookHeight": {
+            "type": "number"
+          },
+          "bagReachOnHook": {
+            "type": "boolean"
+          },
+          "shelfHeight": {
+            "type": "number"
+          },
+          "shelfWidth": {
+            "type": "number"
+          },
+          "shelfDepth": {
+            "type": "number"
+          },
+          "coatHookHeight": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "indoorShowerAdditionalInfo": {
+      "type": "string",
+      "description": "Additional Information for indoor showers",
+      "maxLength": 768
+    },
+    "outdoorShowerAccessibility": {
+      "type": "array",
+      "description": "Shower accessibility details",
+      "items": {
+        "type": "object",
+        "properties": {
+          "barriersToEnter": {
+            "type": "boolean"
+          },
+          "soapDispenser": {
+            "type": "object",
+            "properties": {
+              "height": {
+                "type": "number"
+              },
+              "dispenserType": {
+                "type": "string"
+              },
+              "requiresLessThan5lbsForce": {
+                "type": "boolean"
+              }
+            }
+          },
+          "showerHeadCount": {
+            "type": "integer"
+          },
+          "608ABAASCompliant": {
+            "type": "boolean"
+          },
+          "grabBarCompliant": {
+            "type": "boolean"
+          },
+          "sprayUnitHeight": {
+            "type": "number"
+          },
+          "secondSprayUnitHeight": {
+            "type": "number"
+          },
+          "showerControlsDistanceFromSeatWall": {
+            "type": "number"
+          },
+          "showerStallLength": {
+            "type": "number"
+          },
+          "showerStallWidth": {
+            "type": "number"
+          },
+          "solarShowerHookHeight": {
+            "type": "number"
+          },
+          "bagReachOnHook": {
+            "type": "boolean"
+          },
+          "shelfHeight": {
+            "type": "number"
+          },
+          "shelfWidth": {
+            "type": "number"
+          },
+          "shelfDepth": {
+            "type": "number"
+          },
+          "coatHookHeight": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "outdoorShowerAdditionalInfo": {
+      "type": "string",
+      "description": "Additional Information for outdoor showers",
+      "maxLength": 768
+    },
+    "solarShowerAccessibility": {
+      "type": "array",
+      "description": "Shower accessibility details",
+      "items": {
+        "type": "object",
+        "properties": {
+          "barriersToEnter": {
+            "type": "boolean"
+          },
+          "soapDispenser": {
+            "type": "object",
+            "properties": {
+              "height": {
+                "type": "number"
+              },
+              "dispenserType": {
+                "type": "string"
+              },
+              "requiresLessThan5lbsForce": {
+                "type": "boolean"
+              }
+            }
+          },
+          "showerHeadCount": {
+            "type": "integer"
+          },
+          "608ABAASCompliant": {
+            "type": "boolean"
+          },
+          "grabBarCompliant": {
+            "type": "boolean"
+          },
+          "sprayUnitHeight": {
+            "type": "number"
+          },
+          "secondSprayUnitHeight": {
+            "type": "number"
+          },
+          "showerControlsDistanceFromSeatWall": {
+            "type": "number"
+          },
+          "showerStallLength": {
+            "type": "number"
+          },
+          "showerStallWidth": {
+            "type": "number"
+          },
+          "bagReachOnHook": {
+            "type": "boolean"
+          },
+          "shelfHeight": {
+            "type": "number"
+          },
+          "shelfWidth": {
+            "type": "number"
+          },
+          "shelfDepth": {
+            "type": "number"
+          },
+          "coatHookHeight": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "solarShowerAdditionalInfo": {
+      "type": "string",
+      "description": "Additional Information for solar showers",
+      "maxLength": 768
+    },
+    "utilitySinkAccessibility": {
+      "type": "array",
+      "description": "Utility sink accessibility details",
+      "items": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "type": "string"
+          },
+          "indoor": {
+            "type": "boolean"
+          },
+          "doorFrameMeasurement": {
+            "type": "number"
+          },
+          "doorOpeningPressure": {
+            "type": "number"
+          },
+          "ARARroute": {
+            "type": "boolean"
+          },
+          "sinkTopHeight": {
+            "type": "number"
+          },
+          "sinkClearance": {
+            "type": "number"
+          },
+          "faucetType": {
+            "type": "string",
+            "enum": ["spring loaded", "manual", "automatic"]
+          },
+          "faucetHeight": {
+            "type": "number"
+          },
+          "fixtureClearance": {
+            "type": "number"
+          },
+          "closedWithFist": {
+            "type": "boolean"
+          },
+          "kneeClearance": {
+            "type": "number"
+          },
+          "shelfHeight": {
+            "type": "number"
+          },
+          "shelfLength": {
+            "type": "number"
+          },
+          "shelfDepth": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "utilitySinkAdditionalInfo": {
+      "type": "string",
+      "description": "Additional Information for a utility sink",
+      "maxLength": 768
+    },
+    "waterHydrantAccessibility": {
+      "type": "array",
+      "description": "Yard Hydrant/Spigot accessibility details?",
+      "items": {
+        "type": "object",
+        "properties": {
+          "potableWater": {
+            "type": "object",
+            "properties": {
+              "distance": {
+                "type": "number"
+              },
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "location": {
+            "type": "string"
+          },
+          "ORARRoute": {
+            "type": "boolean"
+          },
+          "spaceAroundHydrant": {
+            "type": "number"
+          },
+          "faucetType": {
+            "type": "string",
+            "enum": [
+              "knob",
+              "lever",
+              "paddle",
+              "pump",
+              "push button",
+              "spring loaded",
+              "automatic"
+            ]
+          },
+          "self-sealingValve": {
+            "type": "boolean"
+          },
+          "spoutDistanceFromRearCenter": {
+            "type": "number"
+          },
+          "spoutHeight": {
+            "type": "number"
+          },
+          "fixtureClearance": {
+            "type": "number"
+          },
+          "closedFistLbsToOperate": {
+            "type": "number"
+          },
+          "waterPSI": {
+            "type": "number"
+          },
+          "grate": {
+            "type": "object",
+            "properties": {
+              "openingSize": {
+                "type": "number"
+              },
+              "openingDirection": {
+                "type": "string",
+                "enum": ["parallel", "perpendicular"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "waterHydrantAdditionalInfo": {
+      "type": "string",
+      "description": "Additional Information for water hydrants",
+      "maxLength": 768
+    },
+    "outdoorKitchenIslandAccessibility": {
+      "type": "array",
+      "description": "Outdoor kitchen pedestal or Island accessibility details",
+      "items": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "type": "string"
+          },
+          "ORARRoute": {
+            "type": "boolean"
+          },
+          "spaceAroundIsland": {
+            "type": "string"
+          },
+          "useableSpaceAroundFeature": {
+            "type": "string"
+          },
+          "stove": {
+            "type": "object",
+            "properties": {
+              "stoveType": {
+                "type": "string",
+                "enum": ["gas", "electric"]
+              },
+              "burnersCount": {
+                "type": "integer"
+              },
+              "stoveHeight": {
+                "type": "number"
+              },
+              "prepShelfHeight": {
+                "type": "number"
+              },
+              "stoveDepth": {
+                "type": "number"
+              },
+              "buttonLocation": {
+                "type": "string"
+              },
+              "buttonHeight": {
+                "type": "number"
+              },
+              "electricalOutlet": {
+                "type": "object",
+                "properties": {
+                  "height": {
+                    "type": "number"
+                  }
+                }
+              },
+              "movable": {
+                "type": "boolean"
+              },
+              "counterHeight": {
+                "type": "number"
+              },
+              "kneeClearance": {
+                "type": "number"
+              }
+            }
+          },
+          "sink": {
+            "type": "object",
+            "properties": {
+              "faucetType": {
+                "type": "string",
+                "enum": [
+                  "knob",
+                  "lever",
+                  "paddle",
+                  "pump",
+                  "push button",
+                  "spring loaded",
+                  "automatic"
+                ]
+              },
+              "self-sealingValve": {
+                "type": "boolean"
+              },
+              "waterspoutDistanceFromRearCenter": {
+                "type": "number"
+              },
+              "waterspoutHeight": {
+                "type": "number"
+              },
+              "clearanceAtFixtures": {
+                "type": "number"
+              },
+              "closedFistLbsToOperated": {
+                "type": "number"
+              },
+              "kneeClearance": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    },
+    "outdoorKitchenIslandAdditionalInfo": {
+      "type": "string",
+      "description": "Additional Information for outdoor kitchen sinks",
+      "maxLength": 768
+    },
+    "fireOptionFeatureAccessibility": {
+      "type": "array",
+      "description": "Fire option feature accessibility details",
+      "items": {
+        "type": "object",
+        "properties": {
+          "fireStructureType": {
+            "type": "string",
+            "enum": ["pedestal grill", "fire ring", "wood stove", "fire place"]
+          },
+          "spaceAround": {
+            "type": "number"
+          },
+          "height": {
+            "type": "number"
+          },
+          "ORARRoute": {
+            "type": "boolean"
+          },
+          "walls": {
+            "type": "boolean"
+          },
+          "fireBuildingSurface": {
+            "type": "boolean"
+          },
+          "moveable": {
+            "type": "boolean"
+          },
+          "depth": {
+            "type": "number"
+          },
+          "useableSpaceAround": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "fireOptionFeatureAdditionalInfo": {
+      "type": "string",
+      "description": "Additional Information for fire option accessibility",
+      "maxLength": 768
+    },
+    "ORAR": {
+      "type": "array",
+      "description": "Outdoor Recreation Access Routes (ORAR) details",
+      "items": {
+        "type": "object",
+        "properties": {
+          "connectTo": {
+            "type": "string",
+            "enum": [
+              "parking",
+              "toilet",
+              "water source",
+              "beach",
+              "pier",
+              "boat ramp",
+              "marina",
+              "playground",
+              "amphitheater",
+              "camp store",
+              "campfire",
+              "firewood",
+              "dump station",
+              "dog parks",
+              "pet relief area"
+            ]
+          },
+          "connectFrom": {
+            "type": "string",
+            "enum": [
+              "parking",
+              "toilet",
+              "water source",
+              "beach",
+              "pier",
+              "boat ramp",
+              "playground",
+              "amphitheater",
+              "camp store",
+              "campfire",
+              "firewood",
+              "dump station",
+              "dog parks",
+              "pet relief area",
+              "picnic table",
+              "fire ring",
+              "pedestal grill",
+              "tent area",
+              "utilities hook up area"
+            ]
+          },
+          "surfaceType": {
+            "type": "string",
+            "enum": [
+              "asphalt",
+              "compacted gravel",
+              "loose gravel",
+              "concrete",
+              "grass",
+              "lumber",
+              "native dirt",
+              "brick",
+              "sand"
+            ]
+          },
+          "handrail": {
+            "type": "object",
+            "properties": {
+              "height": {
+                "type": "number"
+              }
+            }
+          },
+          "maximumWidth": {
+            "type": "number"
+          },
+          "treadOpening": {
+            "type": "boolean"
+          },
+          "treadObstaclesMeasurement": {
+            "type": "number"
+          },
+          "surfaceOpeningsMeasurement": {
+            "type": "number"
+          },
+          "directionOfOpening": {
+            "type": "string",
+            "enum": ["parallel", "perpendicular"]
+          },
+          "surfaceGrade": {
+            "type": "number"
+          },
+          "maximumGradea": {
+            "type": "number"
+          },
+          "crossSlope": {
+            "type": "number"
+          },
+          "exertions": {
+            "type": "string"
+          },
+          "ORARRestAreas": {
+            "type": "object",
+            "properties": {
+              "dimensions": {
+                "length": {
+                  "type": "number"
+                },
+                "width": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "passingSpace": {
+            "type": "boolean"
+          },
+          "TShapedOpenings": {
+            "type": "boolean"
+          },
+          "accessibleThroughoutTheSite": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "ORARAdditionalInfo": {
+      "type": "string",
+      "description": "Additional Information for ORAR",
+      "maxLength": 768
+    },
+    "benchesAccessibility": {
+      "type": "array",
+      "description": "bench details",
+      "items": {
+        "type": "object",
+        "properties": {
+          "benchCount": {
+            "type": "integer"
+          },
+          "location": {
+            "type": "string"
+          },
+          "compliesWithORARStandards": {
+            "type": "boolean"
+          },
+          "distantBetweenBenches": {
+            "type": "number"
+          },
+          "seatHeight": {
+            "type": "number"
+          },
+          "backAndArmrest": {
+            "type": "boolean"
+          },
+          "benchLength": {
+            "type": "number"
+          },
+          "ground": {
+            "type": "object",
+            "properties": {
+              "width": {
+                "type": "number"
+              },
+              "surfaceType": {
+                "type": "string",
+                "enum": [
+                  "asphalt",
+                  "compacted gravel",
+                  "loose gravel ",
+                  "concrete",
+                  "grass",
+                  "lumber",
+                  "native dirt",
+                  "brick",
+                  "sand"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "benchesAdditionalInfo": {
+      "type": "string",
+      "description": "Additional Information for benches",
+      "maxLength": 768
+    },
+    "noiseAccessibility": {
+      "type": "array",
+      "description": "Noise details",
+      "items": {
+        "type": "object",
+        "properties": {
+          "distanceToRoads": {
+            "type": "string"
+          },
+          "distanceToAirport": {
+            "type": "string"
+          },
+          "generator": {
+            "type": "object",
+            "properties": {
+              "allowed": {
+                "type": "boolean"
+              },
+              "areaAllowed": {
+                "type": "string"
+              }
+            }
+          },
+          "noiseMakers": {
+            "type": "string"
+          },
+          "distanceToGroupSites": {
+            "type": "number"
+          },
+          "distanceToCampsites": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "noiseAdditionalInfo": {
+      "type": "string",
+      "description": "Additional Information for noise",
+      "maxLength": 768
+    },
+    "lightingAccessibility": {
+      "type": "array",
+      "description": "Lighting details",
+      "items": {
+        "type": "object",
+        "properties": {
+          "fullLight": {
+            "type": "boolean"
+          },
+          "partialLight": {
+            "type": "boolean"
+          },
+          "streetLighting": {
+            "type": "boolean"
+          },
+          "lightedWalkways": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "informationBoardAccessibility": {
+      "type": "array",
+      "description": "Information board accessibility details",
+      "items": {
+        "type": "object",
+        "properties": {
+          "3-30-3Rule": {
+            "type": "boolean"
+          },
+          "centerLineHeight": {
+            "type": "number"
+          },
+          "needToHandleItems": {
+            "type": "boolean"
+          },
+          "withinReachRange": {
+            "type": "boolean"
+          },
+          "meetsOperablePartsStandard": {
+            "type": "boolean"
+          },
+          "onORAR": {
+            "type": "boolean"
+          },
+          "grade": {
+            "type": "number"
+          },
+          "surfaceType": {
+            "type": "string",
+            "enum": [
+              "asphalt",
+              "compacted gravel",
+              "loose gravel",
+              "concrete",
+              "grass",
+              "lumber",
+              "native dirt",
+              "brick",
+              "sand"
+            ]
+          }
+        }
+      }
+    },
+    "informationBoardAdditionalInfo": {
+      "type": "string",
+      "description": "Additional Information for information boards",
+      "maxLength": 768
+    },
+    "feeTubeAccessibility": {
+      "type": "array",
+      "description": "Fee tube accessibility details",
+      "items": {
+        "type": "object",
+        "properties": {
+          "3-30-3Rule": {
+            "type": "boolean"
+          },
+          "centerLineHeight": {
+            "type": "number"
+          },
+          "needToHandleItems": {
+            "type": "boolean"
+          },
+          "withinReachRange": {
+            "type": "boolean"
+          },
+          "meetsOperablePartsStandard": {
+            "type": "boolean"
+          },
+          "onORAR": {
+            "type": "boolean"
+          },
+          "grade": {
+            "type": "number"
+          },
+          "surfaceType": {
+            "type": "string",
+            "enum": [
+              "asphalt",
+              "compacted gravel",
+              "loose gravel",
+              "concrete",
+              "grass",
+              "lumber",
+              "native dirt",
+              "brick",
+              "sand"
+            ]
+          }
+        }
+      }
+    },
+    "feeTubeAdditionalInfo": {
+      "type": "string",
+      "description": "Additional Information for fee tubes",
+      "maxLength": 768
+    },
+    "kioskFeatureAccessibility": {
+      "type": "array",
+      "description": "Kiosk feature accessibility details",
+      "items": {
+        "type": "object",
+        "properties": {
+          "3-30-3Rule": {
+            "type": "boolean"
+          },
+          "centerLineHeight": {
+            "type": "number"
+          },
+          "needToHandleItems": {
+            "type": "boolean"
+          },
+          "withinReachRange": {
+            "type": "boolean"
+          },
+          "meetsOperablePartsStandard": {
+            "type": "boolean"
+          },
+          "onORAR": {
+            "type": "boolean"
+          },
+          "grade": {
+            "type": "number"
+          },
+          "surfaceType": {
+            "type": "string",
+            "enum": [
+              "asphalt",
+              "compacted gravel",
+              "loose gravel",
+              "concrete",
+              "grass",
+              "lumber",
+              "native dirt",
+              "brick",
+              "sand"
+            ]
+          }
+        }
+      }
+    },
+    "kioskFeatureAdditionalInfo": {
+      "type": "string",
+      "description": "Additional Information for kiosk feature",
+      "maxLength": 768
+    },
+    "internationalSymbolOfAccessibility": {
+      "type": "array",
+      "description": "International symbol of accessibility details",
+      "items": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "type": "string"
+          },
+          "locationAccessible": {
+            "type": "boolean"
+          },
+          "highContrast": {
+            "type": "boolean"
+          },
+          "meetsStandards": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "internationalSymbolOfAccessibilityAdditionalInfo": {
+      "type": "string",
+      "description": "Additional Information for the international symbol of accessibility",
+      "maxLength": 768
+    },
+    "boatRampAccessibility": {
+      "type": "array",
+      "description": "Boat ramp accessibility details",
+      "items": {
+        "type": "object",
+        "properties": {
+          "rampLength": {
+            "type": "number"
+          },
+          "rampWidth": {
+            "type": "number"
+          },
+          "rampGrade": {
+            "type": "number"
+          },
+          "crossSlope": {
+            "type": "number"
+          },
+          "handrails": {
+            "type": "boolean"
+          },
+          "surfaceType": {
+            "type": "string",
+            "enum": [
+              "asphalt",
+              "compacted gravel",
+              "loose gravel",
+              "concrete",
+              "grass",
+              "lumber",
+              "native dirt",
+              "brick",
+              "sand"
+            ]
+          },
+          "ORARToRamp": {
+            "type": "boolean"
+          },
+          "ORARStandards": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "boatRampAdditionalInfo": {
+      "type": "string",
+      "description": "Additional Information for boat ramps",
+      "maxLength": 768
+    },
+    "dockAccessibility": {
+      "type": "array",
+      "description": "Dock/boarding Pier accessibility details",
+      "items": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "type": "string"
+          },
+          "dockType": {
+            "type": "string",
+            "enum": ["fixed", "floating"]
+          },
+          "dockMaterial": {
+            "type": "string",
+            "enum": [
+              "concrete",
+              "log",
+              "lumber",
+              "steel",
+              "plastic",
+              "aluminum"
+            ]
+          },
+          "ORARCompliant": {
+            "type": "boolean"
+          },
+          "ORARToDock": {
+            "type": "boolean"
+          },
+          "transitionFromLand": {
+            "type": "number"
+          },
+          "walkwayWidth": {
+            "type": "number"
+          },
+          "dockOpeningsWidth": {
+            "type": "number"
+          },
+          "directionOfOpenings": {
+            "type": "string",
+            "enum": ["parallel", "perpendicular"]
+          },
+          "boatSlipsCount": {
+            "type": "integer"
+          },
+          "boatSlipsAccessible": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "dockAccessibilityAdditionalInfo": {
+      "type": "string",
+      "description": "Additional Information for dock accessibility",
+      "maxLength": 768
+    },
+    "fishingAccessibility": {
+      "type": "array",
+      "description": "Fishing accessibility details",
+      "items": {
+        "type": "object",
+        "properties": {
+          "fishingType": {
+            "type": "string",
+            "enum": ["ice", "shore", "watercraft", "dock"]
+          },
+          "fishingPlatform": {
+            "type": "boolean"
+          },
+          "fishCleaningStation": {
+            "type": "object",
+            "properties": {
+              "counterHeight": {
+                "type": "number"
+              },
+              "faucetHeight": {
+                "type": "number"
+              },
+              "kneeClearance": {
+                "type": "number"
+              },
+              "pressureRequired": {
+                "type": "number"
+              },
+              "closedFistTest": {
+                "type": "boolean"
+              },
+              "surfaceType": {
+                "type": "string",
+                "enum": [
+                  "asphalt",
+                  "compacted gravel",
+                  "loose gravel",
+                  "concrete",
+                  "grass",
+                  "lumber",
+                  "native dirt",
+                  "brick",
+                  "sand"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "fishingAdditionalInfo": {
+      "type": "string",
+      "description": "Additional Information for fishing",
+      "maxLength": 768
+    },
+    "beachAccessibility": {
+      "type": "array",
+      "description": "Beach access accessibility details",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ORARRoute": {
+            "type": "object",
+            "properties": {
+              "permanent": {
+                "type": "boolean"
+              },
+              "connectsTo": {
+                "type": "string"
+              },
+              "connectsFrom": {
+                "type": "string"
+              },
+              "meetsConnectionStandards": {
+                "type": "boolean"
+              },
+              "treadObstacleMeasurement": {
+                "type": "number"
+              },
+              "surfaceMaterialOpenings": {
+                "type": "number"
+              },
+              "ORARWidth": {
+                "type": "number"
+              },
+              "surfaceGrade": {
+                "type": "number"
+              },
+              "crossSlope": {
+                "type": "number"
+              },
+              "anyExceptions": {
+                "type": "string"
+              },
+              "hasRestArea": {
+                "type": "boolean"
+              },
+              "ORARPassingSpace": {
+                "type": "boolean"
+              },
+              "ORARTOpenings": {
+                "type": "boolean"
+              },
+              "surfaceType": {
+                "type": "string",
+                "enum": [
+                  "asphalt",
+                  "compacted gravel",
+                  "loose gravel",
+                  "concrete",
+                  "grass",
+                  "lumber",
+                  "native dirt",
+                  "brick",
+                  "sand"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "beachAdditionalInfo": {
+      "type": "string",
+      "description": "Additional Information for the beach",
+      "maxLength": 768
+    },
+    "dumpStation": {
+      "type": "array",
+      "description": "",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ORARsurfaceType": {
+            "type": "string",
+            "enum": [
+              "asphalt",
+              "compacted gravel",
+              "loose gravel",
+              "concrete",
+              "grass",
+              "lumber",
+              "native dirt",
+              "brick",
+              "sand"
+            ]
+          },
+          "waterHydrantHeight": {
+            "type": "number"
+          },
+          "hasSlope": {
+            "type": "boolean"
+          },
+          "pressureToOperateHydrant": {
+            "type": "number"
+          },
+          "dumpStation": {
+            "type": "object",
+            "properties": {
+              "height": {
+                "type": "number"
+              },
+              "width": {
+                "type": "number"
+              },
+              "length": {
+                "type": "number"
+              }
+            }
+          },
+          "clearSpace": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "dumpStationAdditionalInfo": {
+      "type": "string",
+      "description": "Additional Information for a dump station",
+      "maxLength": 768
+    },
+    "trashContainerAccessibility": {
+      "type": "array",
+      "description": "Trash container accessibility details",
+      "items": {
+        "type": "object",
+        "properties": {
+          "containerCount": {
+            "type": "integer"
+          },
+          "ABACompliant": {
+            "type": "boolean"
+          },
+          "centerlineHeight": {
+            "type": "number"
+          },
+          "ORAR": {
+            "type": "boolean"
+          },
+          "grade": {
+            "type": "number"
+          },
+          "clearSpaceLocation": {
+            "type": "string",
+            "enum": ["front space", "side space"]
+          },
+          "containerFrontSpaceSize": {
+            "type": "object",
+            "properties": {
+              "length": {
+                "type": "number"
+              },
+              "width": {
+                "type": "number"
+              }
+            }
+          },
+          "containerSideSpaceSize": {
+            "type": "object",
+            "properties": {
+              "length": {
+                "type": "number"
+              },
+              "width": {
+                "type": "number"
+              }
+            }
+          },
+          "containerOpeningSize": {
+            "type": "object",
+            "properties": {
+              "length": {
+                "type": "number"
+              },
+              "width": {
+                "type": "number"
+              }
+            }
+          },
+          "directionOfOpening": {
+            "type": "string",
+            "enum": ["parallel", "perpendicular"]
+          },
+          "animalResistant": {
+            "type": "object",
+            "properties": {
+              "yes": {
+                "type": "object",
+                "properties": {
+                  "containerType": {
+                    "type": "string"
+                  },
+                  "secureType": {
+                    "type": "string",
+                    "enum": ["latch", "clip"]
+                  }
+                }
+              },
+              "no": {
+                "type": "object",
+                "properties": {
+                  "compliesWithStandards": {
+                    "type": "boolean"
+                  },
+                  "50PercentComply": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          },
+          "containerReachRange": {
+            "type": "boolean"
+          },
+          "numberOfAccessibleReceptacles": {
+            "type": "integer"
+          },
+          "surfaceType": {
+            "type": "string",
+            "enum": [
+              "asphalt",
+              "compacted gravel",
+              "loose gravel",
+              "concrete",
+              "grass",
+              "lumber",
+              "native dirt",
+              "brick",
+              "sand"
+            ]
+          }
+        }
+      }
+    },
+    "trashContainerAdditionalInfo": {
+      "type": "string",
+      "description": "Additional Information for a trash containers",
+      "maxLength": 768
+    },
+    "recyclingCenterAccessibility": {
+      "type": "array",
+      "description": "Recycling container accessibility details",
+      "items": {
+        "type": "object",
+        "properties": {
+          "containerCount": {
+            "type": "integer"
+          },
+          "ABACompliant": {
+            "type": "boolean"
+          },
+          "centerlineHeight": {
+            "type": "number"
+          },
+          "ORAR": {
+            "type": "boolean"
+          },
+          "grade": {
+            "type": "number"
+          },
+          "clearSpaceLocation": {
+            "type": "string",
+            "enum": ["front space", "side space"]
+          },
+          "containerFrontSpaceSize": {
+            "type": "object",
+            "properties": {
+              "length": {
+                "type": "number"
+              },
+              "width": {
+                "type": "number"
+              }
+            }
+          },
+          "containerSideSpaceSize": {
+            "type": "object",
+            "properties": {
+              "length": {
+                "type": "number"
+              },
+              "width": {
+                "type": "number"
+              }
+            }
+          },
+          "containerOpeningSize": {
+            "type": "object",
+            "properties": {
+              "length": {
+                "type": "number"
+              },
+              "width": {
+                "type": "number"
+              }
+            }
+          },
+          "directionOfOpening": {
+            "type": "string",
+            "enum": ["parallel", "perpendicular"]
+          },
+          "animalResistant": {
+            "type": "object",
+            "properties": {
+              "yes": {
+                "type": "object",
+                "properties": {
+                  "containerType": {
+                    "type": "string"
+                  },
+                  "secureType": {
+                    "type": "string",
+                    "enum": ["latch", "clip"]
+                  }
+                }
+              },
+              "no": {
+                "type": "object",
+                "properties": {
+                  "compliesWithStandards": {
+                    "type": "boolean"
+                  },
+                  "50PercentComply": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          },
+          "containerReachRange": {
+            "type": "boolean"
+          },
+          "numberOfAccessibleReceptacles": {
+            "type": "integer"
+          },
+          "surfaceType": {
+            "type": "string",
+            "enum": [
+              "asphalt",
+              "compacted gravel",
+              "loose gravel",
+              "concrete",
+              "grass",
+              "lumber",
+              "native dirt",
+              "brick",
+              "sand"
+            ]
+          }
+        }
+      }
+    },
+    "recyclingCenterAdditionalInfo": {
+      "type": "string",
+      "description": "Additional Information for a recycling center",
+      "maxLength": 768
+    },
+    "dumpsterContainerAccessibility": {
+      "type": "array",
+      "description": "Dumpster container accessibility details",
+      "items": {
+        "type": "object",
+        "properties": {
+          "containerCount": {
+            "type": "integer"
+          },
+          "ABACompliant": {
+            "type": "boolean"
+          },
+          "centerlineHeight": {
+            "type": "number"
+          },
+          "ORAR": {
+            "type": "boolean"
+          },
+          "grade": {
+            "type": "number"
+          },
+          "clearSpaceLocation": {
+            "type": "string",
+            "enum": ["front space", "side space"]
+          },
+          "containerFrontSpaceSize": {
+            "type": "object",
+            "properties": {
+              "length": {
+                "type": "number"
+              },
+              "width": {
+                "type": "number"
+              }
+            }
+          },
+          "containerSideSpaceSize": {
+            "type": "object",
+            "properties": {
+              "length": {
+                "type": "number"
+              },
+              "width": {
+                "type": "number"
+              }
+            }
+          },
+          "containerOpeningSize": {
+            "type": "object",
+            "properties": {
+              "length": {
+                "type": "number"
+              },
+              "width": {
+                "type": "number"
+              }
+            }
+          },
+          "directionOfOpening": {
+            "type": "string",
+            "enum": ["parallel", "perpendicular"]
+          },
+          "animalResistant": {
+            "type": "object",
+            "properties": {
+              "yes": {
+                "type": "object",
+                "properties": {
+                  "containerType": {
+                    "type": "string"
+                  },
+                  "secureType": {
+                    "type": "string",
+                    "enum": ["latch", "clip"]
+                  }
+                }
+              },
+              "no": {
+                "type": "object",
+                "properties": {
+                  "compliesWithStandards": {
+                    "type": "boolean"
+                  },
+                  "50PercentComply": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          },
+          "containerReachRange": {
+            "type": "boolean"
+          },
+          "numberOfAccessibleReceptacles": {
+            "type": "integer"
+          },
+          "surfaceType": {
+            "type": "string",
+            "enum": [
+              "asphalt",
+              "compacted gravel",
+              "loose gravel",
+              "concrete",
+              "grass",
+              "lumber",
+              "native dirt",
+              "brick",
+              "sand"
+            ]
+          }
+        }
+      }
+    },
+    "dumpsterContainerAdditionalInfo": {
+      "type": "string",
+      "description": "Additional Information for a dumpster container",
+      "maxLength": 768
+    },
+    "bearBoxAccessibility": {
+      "type": "array",
+      "description": "Bear box details",
+      "items": {
+        "type": "object",
+        "properties": {
+          "distanceFromParking": {
+            "type": "number"
+          },
+          "surfaceType": {
+            "type": "string",
+            "enum": [
+              "asphalt",
+              "compacted gravel",
+              "loose gravel",
+              "concrete",
+              "grass",
+              "lumber",
+              "native dirt",
+              "brick",
+              "sand"
+            ]
+          },
+          "opening": {
+            "type": "object",
+            "properties": {
+              "openingType": {
+                "type": "string"
+              },
+              "directionOfLid": {
+                "type": "string"
+              }
+            }
+          },
+          "interferesWithAmenities": {
+            "type": "boolean"
+          },
+          "depth": {
+            "type": "number"
+          },
+          "height": {
+            "type": "number"
+          },
+          "communal": {
+            "type": "boolean"
+          },
+          "pressureToOpenLid": {
+            "type": "number"
+          },
+          "ORAR": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "bearBoxAdditionalInfo": {
+      "type": "string",
+      "description": "Additional Information for a bear box",
+      "maxLength": 768
+    },
+    "ampitheater": {
+      "type": "array",
+      "description": "Amphitheater details",
+      "items": {
+        "type": "object",
+        "properties": {
+          "structure": {
+            "type": "boolean"
+          },
+          "surfaceType": {
+            "type": "string",
+            "enum": [
+              "asphalt",
+              "compacted gravel",
+              "loose gravel",
+              "concrete",
+              "grass",
+              "lumber",
+              "native dirt",
+              "brick",
+              "sand"
+            ]
+          },
+          "location": {
+            "type": "string"
+          },
+          "ORARCompliant": {
+            "type": "boolean"
+          },
+          "benches": {
+            "type": "object",
+            "properties": {
+              "count": {
+                "type": "integer"
+              },
+              "distanceBetween": {
+                "type": "number"
+              },
+              "seatHeight": {
+                "type": "number"
+              },
+              "back": {
+                "type": "boolean"
+              },
+              "armRest": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ampitheaterAdditionalInfo": {
+      "type": "string",
+      "description": "Additional Information for a ampitheater",
+      "maxLength": 768
+    },
+    "additionalAttribute": {
+      "type": "string",
+      "description": "Any additonal attributes not listed",
+      "maxLength": 768
+    }
+  }
+}

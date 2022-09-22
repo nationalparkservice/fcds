@@ -1,0 +1,47 @@
+{
+  "cookingArea": ["cooking area"],
+  "indoorDining": ["chairs", "table", "chairs", "table"],
+  "waterAccess": "utility sink",
+  "tools": ["axe", "poker", "none", "none", "poker"],
+  "waterType": { "waterType": "no water", "seasonal": false },
+  "animalProofStorage": "food storage locker",
+  "bathing": [{ "facilityType": "shower", "indoor": true, "hotWater": true }],
+  "electric": [
+    { "amps": "20", "free": false },
+    { "amps": "50", "free": true },
+    { "free": true, "amps": "50" }
+  ],
+  "cleaning": ["cleaning equipment", "broom and dust pan"],
+  "grill": { "fuelProvided": false, "grillType": "charcoal" },
+  "firewood": {
+    "firesAllowed": true,
+    "canCollectFirewood": true,
+    "firewoodSupplied": false
+  },
+  "cookingImplements": "utensils",
+  "campfireType": "no campfires at this site",
+  "bedding": [
+    "mattress",
+    "mattress pad",
+    "mattress",
+    "no mattress",
+    "mattress"
+  ],
+  "refrigeration": ["outdoor cooler box"],
+  "water": { "hasHookup": true, "free": true },
+  "waterLocation": "at site",
+  "cookingAmenities": ["none", "stove", "cooking area"],
+  "sewer": { "free": true, "hasHookup": false },
+  "oven": { "fuelProvided": true, "stoveType": "gas" },
+  "laundry": [{ "laundryType": "drying rack", "free": true }],
+  "heatingAndLighting": { "fuelType": ["propane"], "fuelProvide": false },
+  "toilet": ["vault"],
+  "beds": ["twin bed", "twin murphy bed", "couch", "cot", "bunkbeds"],
+  "health": [
+    "smoke alarm",
+    "fire extinguisher",
+    "radon detector",
+    "fire extinguisher"
+  ],
+  "firewoodAdditionalInfo": "nostrud et deserunt culpa amet"
+}

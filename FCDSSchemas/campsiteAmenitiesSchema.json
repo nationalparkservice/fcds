@@ -1,0 +1,328 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Campsite Amenities",
+  "description": "Note: This file is a WIP, certain things have not been implemented yet, for example validation on many of the fields and required attributes",
+  "type": "object",
+  "required": [],
+  "properties": {
+    "waterType": {
+      "type": "object",
+      "description": "What type of water available: drinking water, non-potable water, or none?",
+      "properties": {
+        "waterType": {
+          "type": "string",
+          "enum": ["drinking water", "non-potable", "no water"]
+        },
+        "seasonal": {
+          "type": "boolean"
+        }
+      }
+    },
+    "waterLocation": {
+      "type": "string",
+      "description": "Where can a visitor the drinking/non-potable water?",
+      "enum": ["at site", "walk to water"]
+    },
+    "waterAccess": {
+      "type": "string",
+      "description": "",
+      "enum": [
+        "kitchen sink",
+        "utility sink",
+        "spigot",
+        "hand pump",
+        "rain catchment barrel"
+      ]
+    },
+    "campfireType": {
+      "type": "string",
+      "description": "What type of campfire structure is available?",
+      "enum": [
+        "campfire ring",
+        "wood firepit",
+        "liquid propane gas firepit",
+        "fireplace",
+        "no campfires at this site"
+      ]
+    },
+    "firewood": {
+      "type": "object",
+      "description": "Is firewood supplied at this site?",
+      "properties": {
+        "firesAllowed": {
+          "type": "boolean"
+        },
+        "canCollectFirewood": {
+          "type": "boolean"
+        },
+        "firewoodSupplied": {
+          "type": "boolean"
+        }
+      }
+    },
+    "firewoodAdditionalInfo": {
+      "type": "string",
+      "description": "Additional Information for firewood",
+      "maxLength": 768
+    },
+    "tools": {
+      "type": "array",
+      "description": "What implements are provided for cutting firewood and tending campfires?",
+      "items": {
+        "type": "string",
+        "enum": ["axe", "saw", "poker", "bucket and shovel", "none"]
+      }
+    },
+    "cookingAmenities": {
+      "type": "array",
+      "description": "What cooking amenities are available?",
+      "items": {
+        "type": "string",
+        "enum": [
+          "cooking area",
+          "oven",
+          "stove",
+          "grill",
+          "cooking implements",
+          "animal proof storage",
+          "refrigeration",
+          "outdoor dining",
+          "indoor dining",
+          "none"
+        ]
+      }
+    },
+    "cookingArea": {
+      "type": "array",
+      "description": "What area is available for food preparation and cooking?",
+      "items": {
+        "type": "string",
+        "enum": [
+          "cooking area",
+          "cooking shelter",
+          "kitchen with no water",
+          "kitchen"
+        ]
+      }
+    },
+    "oven": {
+      "type": "object",
+      "description": "What type of stove does the site offer?",
+      "properties": {
+        "stoveType": {
+          "type": "string",
+          "enum": ["gas", "propane", "electric", "kerosene"]
+        },
+        "fuelProvided": {
+          "type": "boolean"
+        }
+      }
+    },
+    "grill": {
+      "type": "object",
+      "description": "What type of grill does the site offer?",
+      "properties": {
+        "grillType": {
+          "type": "string",
+          "enum": ["charcoal", "gas", "propane"]
+        },
+        "fuelProvided": {
+          "type": "boolean"
+        }
+      }
+    },
+    "cookingImplements": {
+      "type": "string",
+      "description": "What pots and utensils are available to prepare food?",
+      "enum": ["pots", "utensils"]
+    },
+    "animalProofStorage": {
+      "type": "array",
+      "description": "What equipment is provided to protect food from wild animals? ",
+      "enum": ["bear pole", "food storage locker"]
+    },
+    "refrigeration": {
+      "type": "array",
+      "description": " What equipment is provided to keep food cool?",
+      "items": {
+        "type": "string",
+        "enum": [
+          "refrigerator",
+          "ice machine",
+          "walk-in freezer",
+          "outdoor cooler box",
+          "meat shed"
+        ]
+      },
+      "outdoorDining": {
+        "type": "array",
+        "description": "What furniture is available to accommodate outdoor dining?",
+        "items": {
+          "type": "string",
+          "description": "",
+          "enum": ["picnic area", "picnic table", "benches"]
+        }
+      }
+    },
+    "indoorDining": {
+      "type": "array",
+      "description": "What furniture is available to accommodate indoor dining?",
+      "items": {
+        "type": "string",
+        "enum": ["dining area", "table", "chairs"]
+      }
+    },
+    "heatingAndLighting": {
+      "type": "object",
+      "properties": {
+        "fuelType": {
+          "type": "array",
+          "description": "What are the sources of heat and light?",
+          "items": {
+            "type": "string",
+            "enum": ["wood", "electric", "propane", "kerosene", "none"]
+          }
+        },
+        "fuelProvide": {
+          "type": "boolean"
+        }
+      }
+    },
+    "toilet": {
+      "type": "array",
+      "description": "What toilet facilities are available at this site? This is distinct from the campgroundlevel toilet information; these are defined under Campground Amenities, above.",
+      "items": {
+        "type": "string",
+        "enum": ["pit", "portable", "vault", "flush", "nine"]
+      }
+    },
+    "bathing": {
+      "type": "array",
+      "description": "What bathing facilities are available at the site?",
+      "items": {
+        "type": "object",
+        "properties": {
+          "facilityType": {
+            "type": "string",
+            "enum": ["shower", "bathtub"]
+          },
+          "indoor": {
+            "type": "boolean"
+          },
+          "hotWater": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "beds": {
+      "type": "array",
+      "description": "What types of sleeping accommodations are available at this site?",
+      "items": {
+        "type": "string",
+        "enum": [
+          "bunkbeds",
+          "twin bed",
+          "twin murphy bed",
+          "twin bed platform",
+          "futon",
+          "cot",
+          "couch"
+        ]
+      }
+    },
+    "bedding": {
+      "type": "array",
+      "description": "What types of bedding is available at this site?",
+      "items": {
+        "type": "string",
+        "enum": ["mattress", "mattress pad", "no mattress"]
+      }
+    },
+    "laundry": {
+      "type": "array",
+      "description": "What accommodations are available for washing and drying clothes?",
+      "items": {
+        "type": "object",
+        "properties": {
+          "laundryType": {
+            "type": "string",
+            "enum": ["dryer", "washer", "clothesline", "drying rack"]
+          },
+          "free": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "cleaning": {
+      "type": "array",
+      "description": "What amenities are available for cleaning the facility?",
+      "items": {
+        "type": "string",
+        "enum": [
+          "broom and dust pan",
+          "mop",
+          "cleaning equipment",
+          "snow shovel",
+          "bucket",
+          "housekeeping staff"
+        ]
+      }
+    },
+    "health": {
+      "type": "array",
+      "description": "What amenities are available to tend to the health and wellbeing of the visitors?",
+      "items": {
+        "type": "string",
+        "enum": [
+          "first aid kit",
+          "fire extinguisher",
+          "security lights",
+          "smoke alarm",
+          "radon detector"
+        ]
+      }
+    },
+    "electric": {
+      "type": "array",
+      "description": "Is there electricity at the site?",
+      "items": {
+        "type": "object",
+        "properties": {
+          "amps": {
+            "type": "string",
+            "enum": [50, 30, 20, 15]
+          },
+          "free": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "water": {
+      "type": "object",
+      "description": "Is there a water hookup?",
+      "properties": {
+        "hasHookup": {
+          "type": "boolean"
+        },
+        "free": {
+          "type": "boolean"
+        }
+      }
+    },
+    "sewer": {
+      "type": "object",
+      "description": "Is there a sewer hookup?",
+      "properties": {
+        "hasHookup": {
+          "type": "boolean"
+        },
+        "free": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

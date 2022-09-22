@@ -1,0 +1,1182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Campground Amenities",
+  "description": "Note: This file is a WIP, certain things have not been implemented yet, for example validation on many of the fields and required attributes",
+  "type": "object",
+  "required": [
+    "toilets",
+    "bathing",
+    "wasteManagement",
+    "forPurchase",
+    "shopping",
+    "communications",
+    "healthAndSafety",
+    "parking",
+    "trails",
+    "recreation",
+    "waterAccess",
+    "boatAccess",
+    "swimming",
+    "fishing",
+    "shelters",
+    "RVAmenities",
+    "livestock",
+    "campgrounds",
+    "medical"
+  ],
+  "properties": {
+    "toilets": {
+      "type": "array",
+      "description": "Identify the shared toilet facilities. This does not include toilet facilities dedicated to specific sites; those are specified as Campsite Amenities.",
+      "items": {
+        "type": "object",
+        "required": ["service", "descriptor"],
+        "properties": {
+          "service": {
+            "type": "string",
+            "enum": ["Flush", "Pit", "Portable", "Vault", "None"]
+          },
+          "descriptor": {
+            "type": "object",
+            "required": [
+              "climateControlled",
+              "electricity",
+              "changingTable",
+              "sanitaryProductVending",
+              "feeBased"
+            ],
+            "properties": {
+              "climateControlled": {
+                "type": "boolean"
+              },
+              "electricity": {
+                "type": "boolean"
+              },
+              "changingTable": {
+                "type": "boolean"
+              },
+              "sanitaryProductVending": {
+                "type": "boolean"
+              },
+              "feeBased": {
+                "type": "object",
+                "required": ["value", "description"],
+                "properties": {
+                  "value": {
+                    "type": "number",
+                    "minimum": 0,
+                    "exclusiveMaximum": 100
+                  },
+                  "description": {
+                    "type": "string",
+                    "maxLength": 50
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "bathing": {
+      "type": "array",
+      "description": "Identify the shared bathing facilities. This does not include bathing facilities dedicated to specific sites; those are specified as Campsite Amenities.",
+      "items": {
+        "type": "object",
+        "required": ["service", "descriptor"],
+        "properties": {
+          "service": {
+            "type": "string",
+            "enum": ["showers", "bathtubs", "no shower facilities"]
+          },
+          "descriptor": {
+            "type": "object",
+            "properties": {
+              "type": "object",
+              "properties": {
+                "indoor": {
+                  "type": "boolean"
+                },
+                "electricity": {
+                  "type": "boolean"
+                },
+                "hotWater": {
+                  "type": "boolean"
+                },
+                "seasonal": {
+                  "type": "boolean"
+                },
+                "feeBased": {
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "type": "number",
+                      "minimum": 0,
+                      "exclusiveMaximum": 100
+                    },
+                    "description": {
+                      "type": "string",
+                      "maxLength": 50
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "wasteManagement": {
+      "description": "What waste management services are offered by the campground?",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["service", "descriptor"],
+        "properties": {
+          "service": {
+            "type": "string",
+            "enum": [
+              "trash",
+              "recycling",
+              "dump station",
+              "no waste management"
+            ]
+          },
+          "descriptor": {
+            "type": "object",
+            "properties": {
+              "seasonal": {
+                "type": "boolean"
+              },
+              "dumpStationSize": {
+                "type": "number",
+                "minimum": 0
+              },
+              "feeBased": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "number",
+                    "minimum": 0,
+                    "exclusiveMaximum": 100
+                  },
+                  "description": {
+                    "type": "string",
+                    "maxLength": 50
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "forPurchase": {
+      "type": "array",
+      "description": "What items are available to purchase at or near (within X miles of) the campground?",
+      "items": {
+        "type": "object",
+        "required": ["item", "descriptor"],
+        "properties": {
+          "item": {
+            "type": "string",
+            "enum": [
+              "campingSupplies",
+              "firewood",
+              "fuel",
+              "ice",
+              "no supplies available"
+            ]
+          },
+          "descriptor": {
+            "type": "object",
+            "properties": {
+              "seasonal": {
+                "type": "boolean"
+              }
+            },
+            "location": {
+              "type": "object",
+              "description": "On-Site, Nearby (how near?)",
+              "properties": {
+                "onSite": {
+                  "type": "string",
+                  "maxLength": 50
+                },
+                "distance": {
+                  "type": "number",
+                  "description": "Distance in miles from the campground"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "shopping": {
+      "type": "array",
+      "description": "What stores are available at or near the campground?",
+      "items": {
+        "type": "object",
+        "required": ["service", "descriptor"],
+        "properties": {
+          "service": {
+            "type": "string",
+
+            "descriptor": {
+              "type": "object",
+              "properties": {
+                "seasonal": {
+                  "type": "boolean"
+                }
+              },
+              "location": {
+                "type": "object",
+                "description": "On-Site, Nearby (how near?)",
+                "properties": {
+                  "onSite": {
+                    "type": "string",
+                    "maxLength": 50
+                  },
+                  "distance": {
+                    "type": "number",
+                    "description": "Distance in miles from the campground"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "communications": {
+      "type": "array",
+      "description": "What phone and internet services are available at or near the campground?",
+      "items": {
+        "type": "object",
+        "required": ["service", "descriptor"],
+        "properties": {
+          "service": {
+            "type": "string",
+            "enum": [
+              "pay phone",
+              "emergency phone",
+              "mobile phone coverage",
+              "wifi or internet",
+              "TV",
+              "no phone"
+            ]
+          },
+          "descriptor": {
+            "type": "object",
+            "properties": {
+              "seasonal": {
+                "type": "boolean"
+              }
+            },
+            "location": {
+              "type": "object",
+              "description": "On-Site, Nearby (how near?)",
+              "properties": {
+                "onSite": {
+                  "type": "string",
+                  "maxLength": 50
+                },
+                "distance": {
+                  "type": "number",
+                  "description": "Distance in miles from the campground"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "healthAndSafety": {
+      "type": "array",
+      "description": "What medical services are available at or near the campground?",
+      "items": {
+        "type": "object",
+        "required": ["service", "descriptor"],
+        "properties": {
+          "service": {
+            "type": "string",
+            "enum": [
+              "medical facilities",
+              "first aid station",
+              "emergency services",
+              "none"
+            ]
+          },
+          "descriptor": {
+            "type": "object",
+            "properties": {
+              "seasonal": {
+                "type": "boolean"
+              }
+            },
+            "location": {
+              "type": "object",
+              "description": "On-Site, Nearby (how near?)",
+              "properties": {
+                "onSite": {
+                  "type": "string",
+                  "maxLength": 50
+                },
+                "distance": {
+                  "type": "number",
+                  "description": "Distance in miles from the campground"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "rentable": {
+      "type": "array",
+      "description": "What amenities are available to rent at the campground? Consider land-based, water-based, and snow-based rentals.",
+      "items": {
+        "type": "object",
+        "oneOf": [
+          {
+            "required": ["landBased"]
+          },
+          { "required": ["waterBased"] }
+        ],
+        "required": ["descriptor"],
+        "properties": {
+          "landBased": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "waterBased": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "descriptor": {
+        "seasonal": {
+          "type": "boolean"
+        },
+        "location": {
+          "type": "object",
+          "description": "On-Site, Nearby (how near?)",
+          "properties": {
+            "onSite": {
+              "type": "string",
+              "maxLength": 50
+            },
+            "distance": {
+              "type": "number",
+              "description": "Distance in miles from the campground"
+            }
+          }
+        }
+      }
+    },
+    "parking": {
+      "type": "array",
+      "description": "Are there parking lots for the campground as a whole? (not individual campsites)",
+      "items": {
+        "type": "object",
+        "required": ["parkingType", "descriptor"],
+        "properties": {
+          "parkingType": {
+            "type": "string",
+            "enum": [
+              "vehicle parking",
+              "motorcycle parking",
+              "RV parking",
+              "trailhead parking",
+              "bicycle racks",
+              "lockers"
+            ]
+          },
+          "descriptor": {
+            "feeBased": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "number",
+                  "minimum": 0,
+                  "exclusiveMaximum": 100
+                },
+                "description": {
+                  "type": "string",
+                  "maxLength": 50
+                }
+              }
+            },
+            "overnight": {
+              "type": "boolean"
+            },
+            "secured": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "trails": {
+      "type": "array",
+      "description": "Are there places to walk, hike, and ride at the campground? What are the surfaces of these trails?",
+      "items": {
+        "type": "object",
+        "required": ["trailType", "descriptors"],
+        "properties": {
+          "trailType": {
+            "type": "string",
+            "enum": [
+              "boardwalk",
+              "fitness trails",
+              "hiking trails",
+              "horseback riding trails",
+              "interpretive trails",
+              "mountain biking trails",
+              "motorcycle trails",
+              "off-road vehicle trails",
+              "trailheads",
+              "walking trails"
+            ]
+          },
+          "descriptors": {
+            "type": "object",
+
+            "properties": {
+              "ABAAccessible": {
+                "type": "boolean"
+              },
+              "pathType": {
+                "type": "string",
+                "enum": ["paved", "dirt", "gravel", "wood"]
+              },
+              "motorVehiclesAllowed": {
+                "type": "boolean"
+              },
+              "horsesAllowed": {
+                "type": "boolean"
+              },
+              "location": {
+                "type": "object",
+                "description": "On-Site, Nearby (how near?)",
+                "properties": {
+                  "onSite": {
+                    "type": "string",
+                    "maxLength": 50
+                  },
+                  "distance": {
+                    "type": "number",
+                    "description": "Distance in miles from the campground"
+                  }
+                }
+              },
+              "url": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "recreation": {
+      "type": "array",
+      "description": "Are there facilities for free play and for participating in organized games?",
+      "items": {
+        "type": "object",
+        "required": ["service", "descriptor"],
+        "properties": {
+          "service": {
+            "type": "string"
+          },
+          "descriptor": {
+            "type": "object",
+            "required": ["indoors", "seasonal", "distance"],
+            "properties": {
+              "indoors": {
+                "type": "boolean"
+              },
+              "seasonal": {
+                "type": "boolean"
+              },
+              "location": {
+                "type": "object",
+                "description": "On-Site, Nearby (how near?)",
+                "properties": {
+                  "onSite": {
+                    "type": "string",
+                    "maxLength": 50
+                  },
+                  "distance": {
+                    "type": "number",
+                    "description": "Distance in miles from the campground"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "recreationAdditionalInfo": {
+      "type": "array",
+      "description": "Additional Information for other activities",
+      "items": {
+        "type": "string",
+        "maxLength": 768
+      }
+    },
+    "waterAccess": {
+      "type": "array",
+      "description": "Does the campground offer access to a major body of water?",
+      "items": {
+        "type": "object",
+        "required": ["value", "descriptor"],
+        "properties": {
+          "value": {
+            "type": "string",
+            "enum": [
+              "lake",
+              "river",
+              "bay",
+              "creek",
+              "ocean",
+              "cold springs",
+              "hot springs"
+            ]
+          },
+          "descriptor": {
+            "seasonal": {
+              "type": "boolean"
+            },
+            "travelType": {
+              "type": "string",
+              "enum": [
+                "on site",
+                "drive to",
+                "hike to",
+                "ride to",
+                "bike to",
+                "boat to"
+              ]
+            },
+            "location": {
+              "type": "object",
+              "description": "On-Site, Nearby (how near?)",
+              "properties": {
+                "onSite": {
+                  "type": "string",
+                  "maxLength": 50
+                },
+                "distance": {
+                  "type": "number",
+                  "description": "Distance in miles from the campground"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "waterAccessAdditionalInfo": {
+      "type": "array",
+      "description": "Additional Information for water access",
+      "items": {
+        "type": "string",
+        "maxLength": 768
+      }
+    },
+    "boatAccess": {
+      "type": "array",
+      "description": "Are there accommodations for launching a boat or removing it from the water?",
+      "items": {
+        "type": "object",
+        "required": ["value", "descriptor"],
+        "properties": {
+          "value": {
+            "type": "string",
+            "enum": [
+              "boat dock",
+              "boat ramp",
+              "boat launch",
+              "boat slip",
+              "boat lift",
+              "canoe launch"
+            ]
+          },
+          "descriptor": {
+            "type": "object",
+            "required": ["feeBased", "distance"],
+            "properties": {
+              "feeBased": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "description": {
+                    "type": "string",
+                    "maxLength": 50
+                  }
+                }
+              },
+              "location": {
+                "type": "object",
+                "description": "On-Site, Nearby (how near?)",
+                "properties": {
+                  "onSite": {
+                    "type": "string",
+                    "maxLength": 50
+                  },
+                  "distance": {
+                    "type": "number",
+                    "description": "Distance in miles from the campground"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "boatAccessAdditionalInfo": {
+      "type": "array",
+      "description": "Additional Information for boat access",
+      "items": {
+        "type": "string",
+        "maxLength": 768
+      }
+    },
+    "swimming": {
+      "type": "array",
+      "description": "Does the campground offer swimming? If so, what kind?",
+      "items": {
+        "type": "object",
+        "requires": ["value", "descriptor"],
+        "properties": {
+          "value": {
+            "type": "string",
+            "enum": [
+              "swimming pool",
+              "lake",
+              "bay",
+              "ocean",
+              "river",
+              "no swimming"
+            ]
+          },
+          "descriptor": {
+            "type": "object",
+            "required": ["fee", "distance"],
+            "properties": {
+              "fee": {
+                "type": "number",
+                "minimum": 0
+              },
+              "location": {
+                "type": "object",
+                "description": "On-Site, Nearby (how near?)",
+                "properties": {
+                  "onSite": {
+                    "type": "string",
+                    "maxLength": 50
+                  },
+                  "distance": {
+                    "type": "number",
+                    "description": "Distance in miles from the campground"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "swimmingAdditionalInfo": {
+      "type": "array",
+      "description": "Additional Information for boat access",
+      "items": {
+        "type": "string",
+        "maxLength": 768
+      }
+    },
+    "fishing": {
+      "type": "array",
+      "description": "Does the campground offer services related to fishing",
+      "items": {
+        "type": "object",
+        "required": ["value", "descriptor"],
+        "properties": {
+          "value": {
+            "type": "string",
+            "enum": [
+              "fish cleaning stations",
+              "fishing dock",
+              "fishing pier",
+              "bait shop",
+              "fishing licenses",
+              "fishing rentals",
+              "fishing guide",
+              "fish disposal",
+              "no fishing amenities"
+            ]
+          },
+          "descriptor": {
+            "type": "object",
+            "required": ["seasonal", "distance"],
+            "properties": {
+              "seasonal": {
+                "type": "boolean"
+              },
+              "location": {
+                "type": "object",
+                "description": "On-Site, Nearby (how near?)",
+                "properties": {
+                  "onSite": {
+                    "type": "string",
+                    "maxLength": 50
+                  },
+                  "distance": {
+                    "type": "number",
+                    "description": "Distance in miles from the campground"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "fishingAdditionalInfo": {
+      "type": "array",
+      "description": "Additional Information for fishing",
+      "items": {
+        "type": "string",
+        "maxLength": 768
+      }
+    },
+    "shelters": {
+      "type": "array",
+      "description": "Does the campground offer a shelter (built structures with minimal furnishings, often with no walls, only a roof)? ",
+      "items": {
+        "type": "string",
+        "enum": [
+          "adirondack shelter",
+          "sleeping shelter",
+          "wind shelter",
+          "picnic shelter",
+          "no shelter"
+        ]
+      }
+    },
+    "RVAmenities": {
+      "type": "array",
+      "description": "Are there accommodations specific to recreational vehicles/trailers/campers?",
+      "items": {
+        "type": "object",
+        "required": ["value", "descriptor"],
+        "properties": {
+          "value": {
+            "type": "string",
+            "enum": ["RV storage", "RV parking"]
+          },
+          "descriptor": {
+            "type": "object",
+            "required": ["fee", "distance"],
+            "properties": {
+              "fee": {
+                "type": "number",
+                "minimum": 0
+              },
+              "location": {
+                "type": "object",
+                "description": "On-Site, Nearby (how near?)",
+                "properties": {
+                  "onSite": {
+                    "type": "string",
+                    "maxLength": 50
+                  },
+                  "distance": {
+                    "type": "number",
+                    "description": "Distance in miles from the campground"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "RVAdditionalInfo": {
+      "type": "array",
+      "description": "Additional Information for RVs",
+      "items": {
+        "type": "string",
+        "maxLength": 768
+      }
+    },
+    "livestock": {
+      "type": "array",
+      "description": "Are there accommodations to shelter and water horses and other livestock?",
+      "items": {
+        "type": "object",
+        "required": ["value", "descriptor"],
+        "properties": {
+          "value": {
+            "type": "object",
+            "required": ["accommodationType", "accommodationName"],
+            "properties": {
+              "accommodationType": {
+                "type": "string",
+                "enum": ["containment", "feed"]
+              },
+              "accommodationName": {
+                "type": "string",
+                "enum": [
+                  "corral",
+                  "stable",
+                  "horse stalls",
+                  "fenced pasture",
+                  "hitching rack",
+                  "horse watering station",
+                  "water trough",
+                  "stock watering tank",
+                  "feed trough",
+                  "feed"
+                ]
+              }
+            }
+          },
+          "descriptor": {
+            "type": "object",
+            "required": ["restrictions", "location"],
+            "properties": {
+              "restrictions": {
+                "type": "boolean"
+              },
+              "location": {
+                "type": "object",
+                "description": "On-Site, Nearby (how near?)",
+                "properties": {
+                  "onSite": {
+                    "type": "string",
+                    "maxLength": 50
+                  },
+                  "distance": {
+                    "type": "number",
+                    "description": "Distance in miles from the campground"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "livestockAdditionalInfo": {
+      "type": "array",
+      "description": "Additional information for Horses and Livestock such as Special use for “Pack Station” or “Horse Staging Area”",
+      "items": {
+        "type": "string",
+        "maxLength": 768
+      }
+    },
+    "groupAmenities": {
+      "type": "array",
+      "description": "Is there a large gathering place (indoors or outdoors, with or without fixed seating)? If so, what kind (e.g. auditorium, campfire circle, event area) and how many are available? Are they reservable?",
+      "items": {
+        "type": "object",
+        "required": ["value", "descriptor"],
+        "properties": {
+          "value": {
+            "type": "string",
+            "enum": [
+              "group cooking facilities",
+              "auditorium",
+              "meeting room",
+              "campfire circle",
+              "amphitheater",
+              "day use area",
+              "event area"
+            ]
+          },
+          "descriptor": {
+            "type": "object",
+            "required": ["feeBased", "distance"],
+            "properties": {
+              "feeBased": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "description": {
+                    "type": "string",
+                    "maxLength": 50
+                  }
+                }
+              },
+              "location": {
+                "type": "object",
+                "description": "On-Site, Nearby (how near?)",
+                "properties": {
+                  "onSite": {
+                    "type": "string",
+                    "maxLength": 50
+                  },
+                  "distance": {
+                    "type": "number",
+                    "description": "Distance in miles from the campground"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "specialUses": {
+      "type": "array",
+      "description": "Are there accommodations designed for individuals and groups focused on a particular activity?",
+      "items": {
+        "type": "string",
+        "enum": ["rock climbers", "mountain bikers"]
+      }
+    },
+    "specialUsesAdditionalInfo": {
+      "type": "array",
+      "description": "Additional information for special uses",
+      "items": {
+        "type": "string",
+        "maxLength": 768
+      }
+    },
+    "campgrounds": {
+      "type": "array",
+      "description": "Other campgrounds within driving distance",
+      "items": {
+        "type": "object",
+        "required": ["name", "url"],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "medical": {
+      "type": "array",
+      "description": "Facilities where visitors can seek urgent and emergency medical care",
+      "items": {
+        "type": "object",
+        "required": ["serviceType"],
+        "properties": {
+          "serviceType": {
+            "type": "string",
+            "enum": ["hospital", "urgent care facility", "emergency services"]
+          },
+          "additionalInfo": {
+            "type": "string",
+            "maxLength": 768
+          }
+        }
+      }
+    },
+    "automotive": {
+      "type": "array",
+      "description": "Services related to cars and other motorized vehicles",
+      "items": {
+        "type": "object",
+        "required": ["serviceType"],
+        "properties": {
+          "serviceType": {
+            "type": "string",
+            "enum": ["auto repair shop", "car rental", "towing service"]
+          },
+          "additionalInfo": {
+            "type": "string",
+            "maxLength": 768
+          }
+        }
+      }
+    },
+    "historic": {
+      "type": "array",
+      "description": "Site of interest due to past or current events",
+      "items": {
+        "type": "object",
+        "required": ["serviceType"],
+        "properties": {
+          "serviceType": {
+            "type": "string",
+            "enum": [
+              "archeological site",
+              "botanical garden",
+              "church",
+              "cultural center",
+              "historic site",
+              "museum",
+              "lighthouse",
+              "lookout tower"
+            ]
+          },
+          "additionalInfo": {
+            "type": "string",
+            "maxLength": 768
+          }
+        }
+      }
+    },
+    "entertainment": {
+      "type": "array",
+      "description": "Venues for entertainment",
+      "items": {
+        "type": "object",
+        "required": ["venueType"],
+        "properties": {
+          "venueType": {
+            "type": "string",
+            "enum": [
+              "casino",
+              "shooting range",
+              "winery",
+              "brewery",
+              "distillery",
+              "theme park"
+            ]
+          },
+          "additionalInfo": {
+            "type": "string",
+            "maxLength": 768
+          }
+        }
+      }
+    },
+    "financialServices": {
+      "type": "array",
+      "description": "Places where a visitor can withdraw or deposit cash.",
+      "items": {
+        "type": "object",
+        "required": ["locationType"],
+        "properties": {
+          "locationType": {
+            "type": "string",
+            "enum": ["bank", "atm"]
+          },
+          "additionalInfo": {
+            "type": "string",
+            "maxLength": 768
+          }
+        }
+      }
+    },
+    "food": {
+      "type": "array",
+      "description": "Places where a visitor can buy groceries or prepared food",
+      "items": {
+        "type": "object",
+        "required": ["locationType"],
+        "locationType": {
+          "type": "string",
+          "enum": ["grocery store", "restaurant"]
+        },
+        "additionalInfo": {
+          "type": "string",
+          "maxLength": 768
+        }
+      }
+    },
+    "lodging": {
+      "type": "array",
+      "description": "Non-camping facilities where visitors can stay overnight.",
+      "items": {
+        "type": "object",
+        "required": ["locationType"],
+        "locationType": {
+          "type": "string",
+          "enum": ["motel", "hotel", "bed and breakfast"]
+        },
+        "additionalInfo": {
+          "type": "string",
+          "maxLength": 768
+        }
+      }
+    },
+    "naturalFeatures": {
+      "type": "array",
+      "description": "Places of interest for their geology, flora, fauna, or general scenery.",
+      "items": {
+        "type": "object",
+        "required": ["feature"],
+        "feature": {
+          "type": "string",
+          "enum": [
+            "geological attraction",
+            "hot springs",
+            "butterfly garden",
+            "scenic outlook"
+          ]
+        },
+        "additionalInfo": {
+          "type": "string",
+          "maxLength": 768
+        }
+      }
+    },
+    "sportsAndRec": {
+      "type": "array",
+      "description": "Venues for all ages entertainment and recreation.",
+      "items": {
+        "type": "object",
+        "required": ["locationType"],
+        "locationType": {
+          "type": "string",
+          "enum": [
+            "amateur radio repeater",
+            "bicycle rental",
+            "community park",
+            "flea market",
+            "junior speedway",
+            "motocross track",
+            "outdoor adventure park"
+          ]
+        },
+        "additionalInfo": {
+          "type": "string",
+          "maxLength": 768
+        }
+      }
+    },
+    "transportation": {
+      "type": "array",
+      "description": "Locations where visitors can access multi-modal or public transportation options",
+      "items": {
+        "type": "object",
+        "required": ["serviceType"],
+        "serviceType": {
+          "type": "string",
+          "enum": [
+            "bus stop",
+            "airport",
+            "shuttle bus",
+            "ride share pickup area"
+          ]
+        },
+        "additionalInfo": {
+          "type": "string",
+          "maxLength": 768
+        }
+      }
+    }
+  }
+}

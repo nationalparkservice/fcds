@@ -1,0 +1,255 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Campsite attributes",
+  "description": "Note: This file is a WIP, certain things have not been implemented yet, for example validation on many of the fields and required attributes",
+  "type": "object",
+  "required": [],
+  "properties": {
+    "campsiteName": {
+      "type": "string",
+      "description": "Alphanumeric label which the campsite is identified."
+    },
+    "campsiteId": {
+      "type": "string",
+      "description": "Unique identifier used by the agency to catalog the sites."
+    },
+    "REC_GOV_ID": {
+      "type": "string",
+      "description": "Unique identifier used by Rec.Gov to catalog the sites. (This will act as a foreign key to Agency Tables for data push/pull.)"
+    },
+    "loop": {
+      "type": "string",
+      "description": "Alphanumeric label by which a group of campsites are organized, to assist in wayfinding within the campground."
+    },
+    "camping_type": {
+      "type": "string",
+      "description": "What kind of camping is allowed on this location?",
+      "enum": [
+        "cabin",
+        "lookout",
+        "firetower",
+        "yurt",
+        "ski hut",
+        "sheeter",
+        "RV",
+        "tent",
+        "pop-up",
+        "anchorage",
+        "mooring",
+        "ship"
+      ]
+    },
+    "capacityRating": {
+      "type": "string",
+      "description": "Single. A designed to accommodate single campers or small groups, such as families. • Multiple (‘Double’, ‘Triple’, or ‘Quad’) size. A campsite designed to accommodate larger groups. Typically, a double campsite accommodates twice the capacity of a single campsite. A triple campsite accommodates three times the single site capacity. • Group. A campsite designed to accommodate larger groups of 20 or more people.",
+      "enum": ["single", "multiple", "group"]
+    },
+    "tentPad": {
+      "type": "object",
+      "description": "Is there a tent pad?",
+      "properties": {
+        "exits": {
+          "type": "string",
+          "enum": ["yes", "no", "N/A"]
+        },
+        "length": {
+          "type": "number"
+        },
+        "width": {
+          "type": "number"
+        }
+      }
+    },
+    "tentPadRequired": {
+      "type": "string",
+      "description": "Are tents required to be placed on the tent pad?",
+      "enum": ["yes", "no", "N/A"]
+    },
+    "reserveType": {
+      "type": "object",
+      "properties": {
+        "reservable": {
+          "type": "string",
+          "enum": ["reservable", "non-reservable", "reservable by management"]
+        },
+        "dateRange": {
+          "type": "object",
+          "properties": {
+            "seasonOpen": {
+              "type": "string",
+              "format": "date"
+            },
+            "seasonClose": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        }
+      }
+    },
+    "photos": {
+      "type": "array",
+      "description": "Image files showing overview of the campsite, taken from different angles.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "image": {
+            "type": "string"
+          },
+          "altText": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "rating": {
+      "type": "number",
+      "description": "Average customer rating from Recreation.gov. Suggest specifying which ratings this includes where it is coming from (i.e. an element for customer satisfaction, specific rating elements, or not include concessions ratings)"
+    },
+    "sun": {
+      "type": "string",
+      "description": "How much sun does the site receive, on average, during the high season?",
+      "enum": ["full shade", "partial shade", "no shade", "unknown"]
+    },
+    "driveway": {
+      "type": "object",
+      "description": "The driveway to the campsite",
+      "properties": {
+        "length": {
+          "type": "number"
+        },
+        "width": {
+          "type": "number"
+        },
+        "grade": {
+          "type": "number"
+        },
+        "drivewayType": {
+          "type": "string",
+          "enum": ["pull-through", "back-in", "front-in"]
+        },
+        "drivewaySurface": {
+          "type": "string",
+          "enum": ["paved", "dirt", "gravel"]
+        }
+      }
+    },
+    "slideout": {
+      "type": "boolean",
+      "description": "Can the site accommodate a slideout? Which side? How large?"
+    },
+    "overheadClearance": {
+      "type": "number",
+      "description": "Describe any height limit for the campsite, based on natural or man-made features (e.g. to ensure it will accommodate a popup or fifth wheel)"
+    },
+    "vehicleTypes": {
+      "type": "string",
+      "enum": [
+        "vehicle",
+        "pickup camper",
+        "camper",
+        "van",
+        "car",
+        "rv",
+        "boat trailer",
+        "fifth wheel",
+        "motorhome",
+        "pop up"
+      ],
+      "description": "Are vehicles allowed at the campsite? If so, which types?"
+    },
+    "maxVehicles": {
+      "type": "integer",
+      "description": "What is the maximum number of vehicles the site accommodates? "
+    },
+    "maxVehiclesAdditionalInfo": {
+      "type": "string",
+      "description": "Provide any additional information, maximum vehicles, etc.",
+      "maxLength": 768
+    },
+    "maxVehicleLength": {
+      "type": "number",
+      "description": "What is the maximum allowed vehicle length (in feet)? In cases of a trailer, the max length should include both the tow vehicle and the trailer. "
+    },
+    "overflowParking": {
+      "type": "boolean",
+      "description": "Is there additional parking available nearby for additional vehicles?"
+    },
+    "maximumTents": {
+      "type": "object",
+      "description": "How many tents (large and small) are allowed on this site? • Large: A tent that accommodates more than 4 people • Small: A tent that accommodates 1-4 people",
+      "properties": {
+        "small": {
+          "type": "integer"
+        },
+        "large": {
+          "type": "integer"
+        }
+      }
+    },
+    "maxHorses": {
+      "type": "integer",
+      "description": "If horses are allowed, what is the maximum number of horses allowed per site?"
+    },
+    "ABAAccessible": {
+      "type": "boolean",
+      "description": "Based on the site’s attributes and amenities, is this site defined as accessible, according to the Accessibility Standards for Federal Outdoor Developed Areas (2014)?"
+    },
+    "methodOfAccess": {
+      "type": "string",
+      "enum": ["drive to", "walk in", "hike to", "ride to", "boat in"],
+      "description": "How is this site accessed?"
+    },
+    "proximityToParking": {
+      "type": "number",
+      "description": "What is the distance from the closest designated parking or parking ‘barrier’ to the campsite?"
+    },
+    "proximityToWater": {
+      "type": "number",
+      "description": "If the site is close to a body of water (e.g. bay, river, lake, creek), indicate how close, in feet."
+    },
+    "proximityToToilets": {
+      "type": "number",
+      "description": "If the campground offers toilets, indicate the distance of the toilets from the site."
+    },
+    "proximityToRoad": {
+      "type": "number",
+      "description": "Indicate the distance of the closest road from the site."
+    },
+    "spaceBetweenCampsites": {
+      "type": "number",
+      "description": "How much space (in feet) separated this campsite from the nearest campsite?"
+    },
+    "code": {
+      "type": "object",
+      "description": "Is access to the site restricted by a combination lock or gate code? If so, what is the combination/ code? Or how do I get it? (what phone number do I call?)",
+      "properties": {
+        "hasCode": {
+          "type": "boolean"
+        },
+        "code": {
+          "type": "number"
+        },
+        "codeLocation": {
+          "type": "number"
+        }
+      }
+    },
+    "perPersonFees": {
+      "type": "number",
+      "description": "Does this site apply a per person fee? If so, what is that fee?"
+    },
+    "hookupFees": {
+      "type": "number",
+      "description": "Does this site apply a separate fee for hookups? If so, what is that fee?"
+    },
+    "premiumFees": {
+      "type": "number",
+      "description": "Does this site apply a premium fee, or a fee for reservations on weekends or holidays? If so, what is that fee?"
+    },
+    "extraVehicleFee": {
+      "type": "number",
+      "description": "Does this site apply a fee for vehicles beyond the standard number? If so, what is that fee?"
+    }
+  }
+}
